@@ -1,17 +1,25 @@
-const http = require('http');
+const express = require('express');
+const axios = require('axios');
 const port = 3000;
 
-const server = http.createServer((req, res) => {
 
-  res.write('hello on port ' + port);
-  res.end();
+app = express();
 
+app.get('/', (req, res) => {
+  res.send('hello world!');
 });
 
-server.listen(port, error => {
-  if(error) {
-    console.log('something went wrong', error);
-  } else {
-    console.log('listening on port ' + port + '...')
-  }
+app.get('/dir2', (req, res) => {
+  res.send('here\'s another directory called: ' + req.query.myshop);
+  console.log(req);
+});
+
+app.get('/restful', (req, res) => {
+  res.send('this will be an api GET')
+
+})
+
+app.listen(port, error => {
+  if(error) console.log('something went wrong');
+  else console.log('listening on port ' + port);
 });
