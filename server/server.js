@@ -5,6 +5,20 @@ const port = 3000;
 
 app = express();
 
+//Solves cors by setting the right header values
+//can also be solved using the express cors() middleware package
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "*");
+  res.header("Access-Control-Allow-Methods", "*");
+  next();
+});
+
+
+app.get('/here', (req, res, next) => {
+  res.send('here!');
+})
+
 app.get('/', (req, res) => {
   res.send('hello world at localhost 3000!');
 });
@@ -14,6 +28,7 @@ app.get('/dir2/:id', (req, res) => {
 });
 
 app.get('/restful', (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Content-Type', 'text/html');
   axios({
     method: 'get',
