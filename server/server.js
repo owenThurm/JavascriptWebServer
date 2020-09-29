@@ -1,6 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const port = 3000;
+const bodyParser = require('body-parser');
 
 
 app = express();
@@ -14,6 +15,16 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.use(bodyParser.json());
+
+app.get('/post', (req, res) => {
+  res.send('this is a GET!');
+});
+
+app.post('/post', (req, res) => {
+  const { a, b } = req.body;
+  res.send(`The sum is: ${a+b}`);
+});
 
 app.get('/here', (req, res, next) => {
   res.send('here!');
