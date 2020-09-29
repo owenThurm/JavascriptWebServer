@@ -1,3 +1,4 @@
+console.log('script.js called')
 /*
 console.log('script file loaded');
 alert('script loaded');
